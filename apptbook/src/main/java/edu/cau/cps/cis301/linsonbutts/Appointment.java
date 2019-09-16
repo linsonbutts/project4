@@ -23,4 +23,5 @@ public class Appointment extends AbstractAppointment {
   public String getDescription() {
     return descript;
   }
+
 }
