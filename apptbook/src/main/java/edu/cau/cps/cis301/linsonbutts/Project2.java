@@ -1,7 +1,9 @@
 package edu.cau.cps.cis301.linsonbutts;
 import java.util.*;
-
-
+import edu.cau.cps.cis301.linsonbutts.Appointment;
+import edu.cau.cps.cis301.linsonbutts.AppointmentBook;
+import edu.pdx.cs410J.AbstractAppointment;
+import edu.pdx.cs410J.AbstractAppointmentBook;
 /**
  * The main class for the CS410J appointment book Project
  */
@@ -16,7 +18,7 @@ public class Project2 {
 
     System.err.println("Missing command line arguments");
 
-    ArrayList<String> book = new ArrayList<>();
+    ArrayList<Appointment> book = new ArrayList<>();
     Appointment appointment = new Appointment(appt);
     AppointmentBook namebook = new AppointmentBook(name,book);
 
@@ -34,19 +36,19 @@ public class Project2 {
     while (choice != 5) {
       switch (choice) {
         case 1:
-          getOwnerName(namebook);
+          namebook.getOwnerName();
           menu(choice);
           break;
         case 2:
-          getAppointments(namebook);
+          namebook.getAppointments();
           menu(choice);
           break;
         case 3:
-          addAppointment();
+          namebook.addAppointment(appointment);
           menu(choice);
           break;
         case 4:
-          getDescription();
+          appointment.getDescription();
           menu(choice);
           break;
         default:

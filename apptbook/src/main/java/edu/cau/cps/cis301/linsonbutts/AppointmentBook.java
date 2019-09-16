@@ -6,11 +6,12 @@ import java.util.Scanner;
 import java.util.ArrayList;
 import java.util.Collection;
 
+
 public class AppointmentBook extends AbstractAppointmentBook {
     private String owner;
-    private ArrayList<String> appointments;
+    private ArrayList<Appointment> appointments;
 
-    public AppointmentBook(String owner, ArrayList<String>appointments){
+    public AppointmentBook(String owner, ArrayList<Appointment>appointments){
         this.owner = owner;
         this.appointments = appointments;
     }
@@ -34,7 +35,8 @@ public class AppointmentBook extends AbstractAppointmentBook {
     public void addAppointment(AbstractAppointment abstractAppointment) {
         Scanner kb = new Scanner(System.in);
         System.out.println("Provide a description for the appointment you would like to add.");
-        String newentry = kb.nextLine();
+        String descript = kb.nextLine();
+        Appointment newentry = new Appointment(descript);
         this.appointments.add(newentry);
     }
 }
