@@ -1,5 +1,9 @@
 package edu.cau.cps.cis301.linsonbutts;
+
+import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.util.*;
+
 import edu.cau.cps.cis301.linsonbutts.Appointment;
 import edu.cau.cps.cis301.linsonbutts.AppointmentBook;
 import edu.pdx.cs410J.AbstractAppointment;
@@ -8,64 +12,96 @@ import edu.pdx.cs410J.AbstractAppointmentBook;
  * The main class for the CS410J appointment book Project
  */
 public class Project2 {
-  public static Scanner kb = new Scanner(System.in);
+// Lines 16-29 provide user with instruction on how to use project and provide PrintWriter class to project.
+  private static PrintWriter out = new PrintWriter(System.out,true);
+  protected static void usage(){
+    out.println("\nusage: java edu.cau.cps.cis301.linsonbutts.Project2 [options] <args>");
+    out.println("   args are (in this order):");
+    out.println("\towner\t\t\tThe person whose owns the appt book");
+    out.println("\tdescription\t\tA description of the appointment");
+    out.println("\tbeginTime\t\tWhen the appt begins (24-hour time)       ");
+    out.println("\tendTime\t\t\tWhen the appt ends (24-hour time)");
+    out.println("options are (options may appear in any order): ");
+    out.println("\t-print\t\t\tPrints a description of the new appointment        ");
+    out.println("\t-README\t\t\tPrints a README for this project and exits Date and       ");
+    out.println("\t\t\t\t\ttime should be in the format: mm/dd/yyyy hh:mm");
+    System.exit(1);
+  }
+
+  protected static Appointment parseArgs(String[] args){
+    boolean isPrintSet=false;
+
+
+    String owner = null;
+    String description=null;
+    String startDate=null;
+    String startTime=null;
+    String endDate=null;
+    String endTime=null;
+    Appointment appointment = null;
+//Lines 42-54 check the value of the arguments from the user if null then the usage will be printed.
+    for (int i=0;i< args.length;i++){
+      if(args[i].equals("-README")){
+        usage();
+      }else if(args[i].equals("-print")){
+        isPrintSet = true;
+        if(i!=0){
+          usage();
+        }
+      }
+
+
+    }
+
+
+    return appointment;
+  }
+  //Main method parses Appointment and AppoinmentBook classes.
   public static void main(String[] args) {
+    Appointment appointment=null;
+    ArrayList<Appointment> appointments = null;
+    AppointmentBook book = null;
+//If statements set the values for the appointments and display them at the end.
+    if(args==null || args.length==0){
+      usage();
+    }
+    else if(args[0]!=null && args[0]!= "addentry"){
+      book = new AppointmentBook(args[0],appointments);
+    }
+    else if(args[0]!= null && args[0] == "addentry")
+    {
+      Appointment newentry = null;
+      out.println("Add an appointment to your appointment book");
+      book.addAppointment(newentry);
+    }
+    else if(args[1]!= null){
+      appointment.setDescript(args[1]);
+    }
+    else if(args[2]!= null){
+      appointment.setBeginDate(args[2]);
+    }
+    else if(args[3]!= null){
+      appointment.setBeginTime(args[3]);
+    }
+    else if(args[4]!= null){
+      appointment.setEndDate(args[4]);
+    }
+    else if(args[1]!= null){
+      appointment.setEndTime(args[5]);
+    }
+    else if(args.length == 5){
+      out.println(book.getOwnerName()+"Appointments are the following"+book.getAppointments());
+    }
+    else if(args.length != 5){
+      out.println("Missing arguments or passed too many arguments check README");
+    }
 
-    System.out.println("Enter a description for you appointment");
-    String appt = kb.nextLine();
-    System.out.println("Enter your name please");
-    String name = kb.nextLine();
 
-    System.err.println("Missing command line arguments");
+    appointment = parseArgs(args);
 
-    ArrayList<Appointment> book = new ArrayList<>();
-    Appointment appointment = new Appointment(appt);
-    AppointmentBook namebook = new AppointmentBook(name,book);
 
 
     System.exit(1);
-
-    System.out.println("Enter a choice for your appointment book.\n" +
-            " 1.Get the owner of the appointment book \n" +
-            "2.To list the appointments within the book\n" +
-            "3.Add another appointment to the book\n" +
-            "4.Provides the description of the most recent appointment.\n" +
-            "5.Exit the program.");
-
-    int choice = kb.nextInt();
-    while (choice != 5) {
-      switch (choice) {
-        case 1:
-          namebook.getOwnerName();
-          menu(choice);
-          break;
-        case 2:
-          namebook.getAppointments();
-          menu(choice);
-          break;
-        case 3:
-          namebook.addAppointment(appointment);
-          menu(choice);
-          break;
-        case 4:
-          appointment.getDescription();
-          menu(choice);
-          break;
-        default:
-          System.out.println("Error please enter  1-5.");
-          menu(choice);
-      }
-    }
-
   }
-  public static int menu(int choice){
-    System.out.println("Enter a choice for your appointment book.\n" +
-            " 1.Get the owner of the appointment book \n" +
-            "2.To list the appointments within the book\n" +
-            "3.Add another appointment to the book\n" +
-            "4.Provides the description of the most recent appointment.\n" +
-            "5.Exit the program.");
-    int c = kb.nextInt();
-    return c;
-  }
+
 }

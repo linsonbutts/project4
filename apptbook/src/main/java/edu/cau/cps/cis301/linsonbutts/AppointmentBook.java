@@ -1,5 +1,6 @@
 package edu.cau.cps.cis301.linsonbutts;
 
+import edu.cau.cps.cis301.linsonbutts.Appointment;
 import edu.pdx.cs410J.AbstractAppointment;
 import edu.pdx.cs410J.AbstractAppointmentBook;
 import java.util.Scanner;
@@ -34,9 +35,23 @@ public class AppointmentBook extends AbstractAppointmentBook {
     @Override
     public void addAppointment(AbstractAppointment abstractAppointment) {
         Scanner kb = new Scanner(System.in);
-        System.out.println("Provide a description for the appointment you would like to add.");
-        String descript = kb.nextLine();
-        Appointment newentry = new Appointment(descript);
-        this.appointments.add(newentry);
+        Appointment appointment = null;
+
+        System.out.println("Enter description");
+        appointment.setDescript(kb.nextLine());
+
+        System.out.println("Enter begin time");
+        appointment.setBeginTime(kb.nextLine());
+
+        System.out.println("Enter begin date");
+        appointment.setBeginDate(kb.nextLine());
+
+        System.out.println("Enter end time");
+        appointment.setEndTime(kb.nextLine());
+
+        System.out.println("Enter end date");
+        appointment.setEndDate(kb.nextLine());
+
+        appointments.add(appointment);
     }
 }
