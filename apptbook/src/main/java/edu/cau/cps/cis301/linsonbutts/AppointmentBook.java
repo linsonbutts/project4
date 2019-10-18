@@ -3,14 +3,15 @@ package edu.cau.cps.cis301.linsonbutts;
 import edu.cau.cps.cis301.linsonbutts.Appointment;
 import edu.pdx.cs410J.AbstractAppointment;
 import edu.pdx.cs410J.AbstractAppointmentBook;
-import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.Collection;
+
+import java.io.*;
+import java.util.*;
 
 
 public class AppointmentBook extends AbstractAppointmentBook {
     private String owner;
     private ArrayList<Appointment> appointments;
+
 
     public AppointmentBook(String owner, ArrayList<Appointment>appointments){
         this.owner = owner;
@@ -54,4 +55,6 @@ public class AppointmentBook extends AbstractAppointmentBook {
 
         appointments.add(appointment);
     }
-}
+
+
+    }
